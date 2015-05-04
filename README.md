@@ -9,6 +9,7 @@
 # Running
 
 mkdir -p ~/mongodb/quizapp
+
 mongod --dbpath ~/mongodb/quizapp --smallfiles
 
 mvn jetty:run

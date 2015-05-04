@@ -1,29 +1,29 @@
 package nl.jpoint.quizapp;
 
+import java.io.IOException;
+
 import org.atmosphere.config.managed.Decoder;
 import org.atmosphere.config.managed.Encoder;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import java.io.IOException;
-
-public class MessageEncoderDecoder implements Encoder<QuizMessage, String>, Decoder<String, QuizMessage>{
+public class QuizMessageEncoderDecoder implements Encoder<QuizMessage, String>, Decoder<String, QuizMessage> {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public QuizMessage decode(String s) {
-        try{
+        try {
             return mapper.readValue(s, QuizMessage.class);
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
     public String encode(QuizMessage message) {
-        try{
+        try {
             return mapper.writeValueAsString(message);
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

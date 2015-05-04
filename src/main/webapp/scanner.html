@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+    <head>
+		<title>Quizapp: Scanner</title>
+		<link rel="stylesheet" href="css/style.css">
+		
+		<!-- https://github.com/LazarSoft/jsqrcode -->
+		<script type="text/javascript" src="jsqrcode/grid.js"></script>
+		<script type="text/javascript" src="jsqrcode/version.js"></script>
+		<script type="text/javascript" src="jsqrcode/detector.js"></script>
+		<script type="text/javascript" src="jsqrcode/formatinf.js"></script>
+		<script type="text/javascript" src="jsqrcode/errorlevel.js"></script>
+		<script type="text/javascript" src="jsqrcode/bitmat.js"></script>
+		<script type="text/javascript" src="jsqrcode/datablock.js"></script>
+		<script type="text/javascript" src="jsqrcode/bmparser.js"></script>
+		<script type="text/javascript" src="jsqrcode/datamask.js"></script>
+		<script type="text/javascript" src="jsqrcode/rsdecoder.js"></script>
+		<script type="text/javascript" src="jsqrcode/gf256poly.js"></script>
+		<script type="text/javascript" src="jsqrcode/gf256.js"></script>
+		<script type="text/javascript" src="jsqrcode/decoder.js"></script>
+		<script type="text/javascript" src="jsqrcode/qrcode.js"></script>
+		<script type="text/javascript" src="jsqrcode/findpat.js"></script>
+		<script type="text/javascript" src="jsqrcode/alignpat.js"></script>
+		<script type="text/javascript" src="jsqrcode/databr.js"></script>
+		
+		<script type="text/javascript">
+		
+			/*
+			 * Callback after reading the QR code:
+			 */
+			function read(result) {
+				if(result && result.indexOf('http') == 0) {
+					window.location = result;
+				} else {
+					stopProcessing('No QR code detected, try again.');
+				}
+			}	
+	
+			/*
+			 * Setup all Javascript functions for QR code reading:
+			 */
+			function load() {
+				qrcode.callback = read;
+				
+				cameraInput = document.getElementById('cameraInput');
+				cameraInput.onchange = function(e) {
+					startProcessing();
+					e.preventDefault();
+    				if(this.files.length === 0) return;
+    				
+    				var reader = new FileReader();
+					reader.onload = (function(theFile) {
+						return function(e) {
+							qrcode.decode(e.target.result);
+						};
+      				})(this.files[0]);
+					reader.readAsDataURL(this.files[0]);
+					cameraInput.value = null;
+				};
+			}
+			
+			/*
+			 * Change the GUI to disable the input field
+			 * at start of processing the file.
+			 */
+			function startProcessing() {
+				var cameraButton = document.getElementById('cameraButton');
+				var cameraInput = document.getElementById('cameraInput');
+				var message = document.getElementById('message');
+
+				cameraInput.disabled = true;
+				cameraButton.src = 'images/pending.png';
+				message.textContent = 'Processing photo...';
+				
+			}
+			
+			/*
+			 * Change the GUI to enable the input field
+			 * at stop of processing the file.
+			 */
+			function stopProcessing(msg) {
+				var cameraButton = document.getElementById('cameraButton');
+				var cameraInput = document.getElementById('cameraInput');
+				var message = document.getElementById('message');
+				
+				cameraInput.disabled = false;
+				cameraButton.src = 'images/button.png';
+				message.textContent = msg;
+			}
+		</script>
+		
+	</head>
+	<body onload="load()">
+		
+		<h1 id="message">Scan the QR code to start</h1>
+		
+		<div class="image-upload">
+		    <label for="cameraInput">
+        		<img id="cameraButton" src="images/button.png" height="512px" width="512px" />
+    		</label>
+			<input type="file" class="upload" capture="camera" accept="image/*" id="cameraInput" name="cameraInput" />
+		</div>
+		
+	</body>
+</html>

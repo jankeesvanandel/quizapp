@@ -11,6 +11,9 @@
   <version>1.0.0-SNAPSHOT</version>
 
   <properties>
+    <jackson-mapper-version>[1, )</jackson-mapper-version>
+    <zxing-version>[3.1.0, )</zxing-version>
+    <servlet-version>[3.1.0, )</servlet-version>
     <atmosphere-version>[2, )</atmosphere-version>
     <client-version>[2.0.5, )</client-version>
     <logback-version>[1, )</logback-version>
@@ -42,7 +45,18 @@
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-mapper-asl</artifactId>
-      <version>[1, )</version>
+      <version>${jackson-mapper-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>core</artifactId>
+      <version>${zxing-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${servlet-version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

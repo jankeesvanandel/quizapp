@@ -1,0 +1,64 @@
+Some example questions that we could use for Devoxx 2015
+
+Who were in the Gang of Four?
+x   Johnson, Helm, Gamma, Vlissides
+    Bloch, Long, Gamma, Martin
+    Alpha, Beta, Gamma, Delta
+    Johanssen, Gamma, Vlissides, Nygaard
+	
+Which of the following isn't a proposed Java closures implementation?
+    BGGA
+    CICE
+x   JLP	
+    FCM
+
+What is the project name for a Java REPL?
+    Jigsaw
+    Kona
+x   Kulla
+ 	IcedTea
+ 	Verona
+ 	
+ Which of the following wasn't an official Java version?
+ 	Dophin
+ 	Mustang
+ 	Tiger
+x 	Leopard
+    Oak
+ 	Kestrel
+ 	Mistral
+
+When did Java get regular expressions?
+	J2SE 1.1
+	J2SE 1.2
+	J2SE 1.3
+x	J2SE 1.4
+	J2SE 5.0	
+	Java SE 6.0
+	What are regular expressions?
+	
+What is the last added reserved keyword in Java?
+    goto
+    strictfp
+    assert
+x   enum
+    volatile
+
+What is JSR-1:
+x   Real-time Specification for Java
+    Language Specification for Java
+    Boundary-Scan API
+    JavaTM Language Specification
+
+Where does Java use 'galloping'?
+    Non-blocking IO
+ x  Sorting
+    Lambda (Tail recursion)
+    (Elliptic curve) cryptography
+
+OpenJDK... what version control system does it use?
+    CVS
+    Subversion
+x   Mercurial
+    Git
+    

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 public class QRCodeServlet extends HttpServlet {
 
 	private QRCodeGenerator generator = new QRCodeGenerator();
-
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 

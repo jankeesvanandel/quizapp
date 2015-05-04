@@ -73,10 +73,14 @@ $(function () {
 
     function showQuestion(message){
         content.empty();
-        content.append('<p>'+message.question+'</p>');
+        var form = $('<form action="answer">');
+        content.append(form);
+        form.append('<p class="question">'+message.question+'</p>');
         for (var option in message.options){
-            content.append('<p>' + message.options[option] + '</p>');
+            form.append('<p class="question_option"><input type="radio" name="answer" value="'+
+                option+'"/>' + message.options[option] + '</p>');
         }
+        form.append('<input type="submit"/>');
     };
 
 });

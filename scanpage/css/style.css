@@ -1,0 +1,26 @@
+html {
+    background: #E1ECF4;
+}
+
+body {
+	margin:50px 0px; padding:0px;
+	text-align:center;
+}
+
+h1 {
+	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.3999996185303px;
+	color: #3C3C3C;
+}
+
+.image-upload input {
+	width: 0px;
+	height: 0px;
+	margin: 0px;
+	padding: 0px;
+	visibility: hidden;
+}

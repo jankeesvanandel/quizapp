@@ -14,3 +14,7 @@ hs_err_pid*
 bin/
 
 .project
+
+target/
+.idea/
+*.iml

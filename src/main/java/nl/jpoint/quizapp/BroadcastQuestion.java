@@ -1,9 +1,9 @@
 package nl.jpoint.quizapp;
 
-import org.atmosphere.cpr.AtmosphereFramework;
-import org.atmosphere.cpr.AtmosphereResourceFactory;
-import org.atmosphere.cpr.BroadcasterFactory;
-import org.atmosphere.util.ServletContextFactory;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,9 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.atmosphere.cpr.AtmosphereFramework;
+import org.atmosphere.cpr.AtmosphereResourceFactory;
+import org.atmosphere.cpr.BroadcasterFactory;
+import org.atmosphere.util.ServletContextFactory;
 
 @WebServlet("/broadcast")
 public class BroadcastQuestion extends HttpServlet {
@@ -28,7 +30,7 @@ public class BroadcastQuestion extends HttpServlet {
 
         QuizQuestion question = new QuizQuestion();
         question.setQuestion("What?");
-        List options = new ArrayList<String>();
+        List<String> options = new ArrayList<>();
         options.add("a");
         options.add("b");
         options.add("c");

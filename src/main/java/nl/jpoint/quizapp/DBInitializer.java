@@ -14,21 +14,25 @@ public class DBInitializer {
   private static void populateQuizes(final DBCollection quizes) {
     final BasicDBList questions = new BasicDBList();
     questions.add(new BasicDBObject()
+            .append("id", 1)
             .append("question", "How old is Java in 2015?")
             .append("correctAnswer", "20")
             .append("otherAnswers", createStringDBList("19", "21"))
     );
     questions.add(new BasicDBObject()
+            .append("id", 2)
             .append("question", "How old is Java in 2016?")
             .append("correctAnswer", "21")
             .append("otherAnswers", createStringDBList("20", "22"))
     );
     questions.add(new BasicDBObject()
+            .append("id", 3)
             .append("question", "How old is Java in 2017?")
             .append("correctAnswer", "22")
             .append("otherAnswers", createStringDBList("23", "21"))
     );
     quizes.insert(new BasicDBObject()
+            .append("id", 1)
             .append("name", "Devoxx2015Quiz")
             .append("questions", questions)
     );

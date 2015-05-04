@@ -1,5 +1,7 @@
 package nl.jpoint.quizapp;
 
+import org.owasp.encoder.Encode;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;

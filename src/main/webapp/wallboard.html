@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Quiz App</title>
+  <style type="text/css">
+    html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      max-height: 100%;
+      margin: 0 0 175px;
+      padding: 0;
+      background: linear-gradient(#eee, #fff)
+      top: 0;
+    }
+
+    header {
+      margin: 0;
+      padding: 10px;
+      background-color: #017;
+      color: #fff;
+      text-align: center;
+      font-size: xx-large;
+      box-sizing: border-box;
+      height: 100px;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    li {
+      padding: 10px;
+      font-size: larger;
+    }
+
+    div.content {
+      margin: 0 auto;
+      width: 400px;
+      height: 400px;
+      display: block;
+    }
+
+    div.content > * {
+      text-align: center;
+      margin: 0 auto;
+      width: 400px;
+      display: block;
+    }
+
+    img {
+      width: 400px;
+      height: 400px;
+    }
+
+    img.rightFloated {
+      width: 300px;
+      height: 300px;
+      position: fixed;
+      right: 20px;
+      top: 100px;
+    }
+
+    li:before
+    {
+      content: '✔';
+      margin-left: -1em; margin-right: .100em;
+    }
+
+    ul
+    {
+      padding-left:20px;
+      text-indent:2px;
+      list-style: none outside none;
+    }
+
+    li {
+      background-color: #fcfcfc;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #800;
+      text-align: right;
+      padding: 20px;
+      box-sizing: border-box;
+      height: 75px;
+    }
+
+    button {
+      padding: 10px;
+    }
+
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+    }
+
+  </style>
+</head>
+<body ng-app="quizapp" ng-controller="QuizCtrl as quiz" ng-cloak>
+<header>
+  <h1>{{quiz.quizName}}</h1>
+</header>
+<div class="content">
+  <img ng-src="/qrcode?url={{quiz.url|urlEncode}}"
+       ng-class="{rightFloated: quiz.running}">
+  <span class="centered" ng-show="quiz.running">
+    <h2>{{quiz.currentQuestionContents}}</h2>
+    <ul>
+      <li ng-repeat="answer in quiz.answers">{{answer}}</li>
+    </ul>
+  </span>
+</div>
+<footer>
+  <button ng-if="quiz.running" ng-click="quiz.nextQuestion()" ng-show="quiz.running">Next question</button>
+  <button ng-if="!quiz.running" ng-click="quiz.start()">Start quiz</button>
+</footer>
+</body>
+<script type="text/javascript" src="javascript/angular.min.js"></script>
+<script type="text/javascript">
+  angular.module('quizapp', [])
+      .filter('urlEncode', function() {
+        return window.encodeURIComponent;
+      })
+      .controller('QuizCtrl', function ($http, $location) {
+        var self = this;
+        self.id = $location.search().id;
+        self.url = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/' + self.id;
+        self.running = false;
+
+        $http.get('/wallboard?id=' + self.id).then(function (res) {
+          res = res.data;
+          self.quizName = res.name;
+          self.questions = res.questions;
+          self.currentQuestion = res.questions[self.currentQuestionIndex];
+        });
+        self.nextQuestion = function () {
+          self.currentQuestionIndex++;
+          self.running = self.currentQuestionIndex < self.questions.length;
+          if (self.running) {
+            updateQuestion();
+          } else {
+            self.currentQuestion = null;
+            self.currentQuestionContents = null;
+          }
+        };
+        self.start = function () {
+          self.running = true;
+          self.currentQuestionIndex = 0;
+          updateQuestion();
+        };
+        function updateQuestion() {
+          self.currentQuestion = self.questions[self.currentQuestionIndex];
+          self.currentQuestionContents = self.currentQuestion.question;
+          self.answers = randomize(self.currentQuestion.correctAnswer, self.currentQuestion.otherAnswers);
+        }
+        function randomize(answer, otherAnswers) {
+          function fisherYates(array){
+            var count = array.length,
+                randomnumber,
+                temp;
+            while( count ){
+              randomnumber = Math.random() * count-- | 0;
+              temp = array[count];
+              array[count] = array[randomnumber];
+              array[randomnumber] = temp
+            }
+          }
+          var combined = otherAnswers.slice(0);
+          combined.push(answer);
+          fisherYates(combined);
+          return combined;
+        }
+      });
+</script>
+</html>

@@ -3,7 +3,6 @@ package nl.jpoint.quizapp;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import com.mongodb.MongoClient;
 import org.atmosphere.config.service.Disconnect;
 import org.atmosphere.config.service.ManagedService;
 import org.atmosphere.config.service.Message;
@@ -12,6 +11,8 @@ import org.atmosphere.cpr.AtmosphereResource;
 import org.atmosphere.cpr.AtmosphereResourceEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.mongodb.MongoClient;
 
 @ManagedService(path = "/quiz")
 public final class Quiz {
@@ -25,7 +26,8 @@ public final class Quiz {
     /**
      * Invoked when the connection as been fully established and suspended, e.g ready for receiving messages.
      *
-     * @param r the atmosphere resource
+     * @param r
+     *        the atmosphere resource
      */
     @Ready
     public final void onReady(final AtmosphereResource r) {
@@ -35,7 +37,8 @@ public final class Quiz {
     /**
      * Invoked when the client disconnect or when an unexpected closing of the underlying connection happens.
      *
-     * @param event the event
+     * @param event
+     *        the event
      */
     @Disconnect
     public final void onDisconnect(final AtmosphereResourceEvent event) {
@@ -46,8 +49,9 @@ public final class Quiz {
         }
     }
 
-    @Message(encoders = {QuizMessageEncoderDecoder.class}, decoders = {QuizMessageEncoderDecoder.class})
+    @Message(encoders = { QuizMessageEncoderDecoder.class }, decoders = { QuizMessageEncoderDecoder.class })
     public final QuizQuestion onMessage(final QuizQuestion message) throws IOException {
+        System.out.println("Quiz.onMessage" + message);
         return message;
     }
 

@@ -6,7 +6,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 
-public class MessageEncoderDecoder implements Encoder<QuizQuestion, String>, Decoder<String, QuizQuestion>{
+public class QuizMessageEncoderDecoder implements Encoder<QuizQuestion, String>, Decoder<String, QuizQuestion>{
 
     private final ObjectMapper mapper = new ObjectMapper();
 

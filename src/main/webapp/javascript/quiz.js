@@ -42,7 +42,6 @@ $(function () {
     };
 
     request.onMessage = function (response) {
-
         var message = response.responseBody;
         try {
             var json = atmosphere.util.parseJSON(message);
@@ -50,7 +49,7 @@ $(function () {
             console.log('This doesn\'t look like a valid JSON: ', message);
             return;
         }
-        //todo: show question
+        showQuestion(json);
     };
 
     request.onClose = function(response) {
@@ -71,4 +70,13 @@ $(function () {
     };
 
     subSocket = socket.subscribe(request);
+
+    function showQuestion(message){
+        content.empty();
+        content.append('<p>'+message.question+'</p>');
+        for (var option in message.options){
+            content.append('<p>' + message.options[option] + '</p>');
+        }
+    };
+
 });

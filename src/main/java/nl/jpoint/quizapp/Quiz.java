@@ -17,16 +17,15 @@ import org.slf4j.LoggerFactory;
 public final class Quiz {
     private static final Logger logger = LoggerFactory.getLogger(Quiz.class);
 
-  public Quiz() throws UnknownHostException {
-    MongoClient mongoClient = new MongoClient("localhost");
-    DBInitializer.create(mongoClient);
-  }
+    public Quiz() throws UnknownHostException {
+        MongoClient mongoClient = new MongoClient("localhost");
+        DBInitializer.create(mongoClient);
+    }
 
-  /**
+    /**
      * Invoked when the connection as been fully established and suspended, e.g ready for receiving messages.
      *
-     * @param r
-     *        the atmosphere resource
+     * @param r the atmosphere resource
      */
     @Ready
     public final void onReady(final AtmosphereResource r) {
@@ -36,8 +35,7 @@ public final class Quiz {
     /**
      * Invoked when the client disconnect or when an unexpected closing of the underlying connection happens.
      *
-     * @param event
-     *        the event
+     * @param event the event
      */
     @Disconnect
     public final void onDisconnect(final AtmosphereResourceEvent event) {
@@ -49,8 +47,7 @@ public final class Quiz {
     }
 
     @Message(encoders = {QuizMessageEncoderDecoder.class}, decoders = {QuizMessageEncoderDecoder.class})
-    public final QuizQuestion onMessage(final QuizQuestion message) throws IOException{
-        logger.info("Just send {}", message.getQuestion());
+    public final QuizQuestion onMessage(final QuizQuestion message) throws IOException {
         return message;
     }
 

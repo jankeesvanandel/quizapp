@@ -69,7 +69,7 @@
 				var message = document.getElementById('message');
 
 				cameraInput.disabled = true;
-				cameraButton.src = 'pending.png';
+				cameraButton.src = 'images/pending.png';
 				message.textContent = 'Processing photo...';
 				
 			}
@@ -84,7 +84,7 @@
 				var message = document.getElementById('message');
 				
 				cameraInput.disabled = false;
-				cameraButton.src = 'button.png';
+				cameraButton.src = 'images/button.png';
 				message.textContent = msg;
 			}
 		</script>
@@ -96,7 +96,7 @@
 		
 		<div class="image-upload">
 		    <label for="cameraInput">
-        		<img id="cameraButton" src="button.png" height="512px" width="512px" />
+        		<img id="cameraButton" src="images/button.png" height="512px" width="512px" />
     		</label>
 			<input type="file" class="upload" capture="camera" accept="image/*" id="cameraInput" name="cameraInput" />
 		</div>

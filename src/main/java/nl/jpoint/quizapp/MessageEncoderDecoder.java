@@ -6,21 +6,21 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 
-public class MessageEncoderDecoder implements Encoder<QuizMessage, String>, Decoder<String, QuizMessage>{
+public class MessageEncoderDecoder implements Encoder<QuizQuestion, String>, Decoder<String, QuizQuestion>{
 
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    public QuizMessage decode(String s) {
+    public QuizQuestion decode(String s) {
         try{
-            return mapper.readValue(s, QuizMessage.class);
+            return mapper.readValue(s, QuizQuestion.class);
         }catch(IOException e){
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public String encode(QuizMessage message) {
+    public String encode(QuizQuestion message) {
         try{
             return mapper.writeValueAsString(message);
         }catch(IOException e){

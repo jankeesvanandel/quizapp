@@ -39,8 +39,8 @@ public final class Quiz{
     }
 
     @Message(encoders = {MessageEncoderDecoder.class}, decoders = {MessageEncoderDecoder.class})
-    public final QuizMessage onMessage(final QuizMessage message) throws IOException{
-        logger.info("Just send {}", message.getText());
+    public final QuizQuestion onMessage(final QuizQuestion message) throws IOException{
+        logger.info("Just send {}", message.getQuestion());
         return message;
     }
 
